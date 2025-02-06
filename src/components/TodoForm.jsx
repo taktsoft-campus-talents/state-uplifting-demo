@@ -12,6 +12,8 @@ export function TodoForm({ onSubmitTodo }) {
       title: titleInput,
       desc: descriptionInput,
     });
+    setDescriptionInput("");
+    setTitleInput("");
   }
 
   return (
