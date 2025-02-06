@@ -1,8 +1,7 @@
 import "./App.css";
-import Counter from "./components/Counter";
-import Display from "./components/Display";
 import { useState } from "react";
 import Todo from "./components/Todo";
+import { TodoForm } from "./components/TodoForm";
 
 const data = [
   {
@@ -10,6 +9,12 @@ const data = [
     title: "Water plants",
     desc: "It's very important!",
     isDone: true,
+  },
+  {
+    id: 3,
+    title: "Staubsaugen",
+    desc: "It's really dirty!!!",
+    isDone: false,
   },
   {
     id: 2,
@@ -20,8 +25,6 @@ const data = [
 ];
 
 function App() {
-  // const [count, setCount] = useState(0);
-  // console.log("I am parent", count);
   const [todos, setTodos] = useState(data);
 
   // delete pattern: use filter to filter out the selected id
@@ -59,11 +62,19 @@ function App() {
     setTodos(result);
   }
 
+  // {title: string, desc: string}
+  // addTodo will generate a unique id for the new todo
+  function addTodo(newTodo) {
+    const sortedTodos = todos.toSorted((a, b) => b.id - a.id);
+    const maxId = sortedTodos[0].id;
+
+    const newTodos = [{ ...newTodo, isDone: false, id: maxId + 1 }, ...todos];
+    setTodos(newTodos);
+  }
+
   return (
     <>
-      {/* <Counter count={count} setCount={setCount}></Counter>
-      <Display totalCount={count}></Display> */}
-
+      <TodoForm onSubmitTodo={addTodo} />
       {todos.map((todo) => {
         return (
           <Todo

@@ -1,8 +1,6 @@
 import "./Todo.css";
 
 function Todo({ id, title, desc, onDeleteTodo, onToggleTodo, isDone }) {
-  console.log("One todo", id, title, desc);
-
   return (
     <div className="todo-container">
       <h2>{title}</h2>
